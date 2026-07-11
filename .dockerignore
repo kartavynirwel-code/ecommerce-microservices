@@ -1,0 +1,29 @@
+# This project does not ship Dockerfiles/compose files yet, but this
+# .dockerignore is prepared for when you add containerization so secrets
+# and build artifacts are never baked into images.
+
+**/.env
+**/.env.*
+!**/.env.example
+
+**/node_modules
+**/dist
+**/build
+**/.vite
+
+**/target
+**/*.class
+**/*.jar
+
+**/__pycache__
+**/*.pyc
+**/.venv
+**/venv
+
+.git
+.gitignore
+.dockerignore
+**/.idea
+**/.vscode
+*.md
+!README.md

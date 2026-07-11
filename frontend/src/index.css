@@ -1,0 +1,331 @@
+:root {
+  --color-black: #1a1512;
+  --color-black-soft: #24201c;
+  --color-brown-dark: #3e2a1f;
+  --color-brown: #6b4226;
+  --color-brown-light: #a9744f;
+  --color-tan: #d8b892;
+  --color-cream: #f4ead9;
+  --color-accent: #c17a3f;
+  --color-danger: #b3452c;
+  --color-success: #6b8a4a;
+
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius: 10px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-black);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-cream);
+  margin: 0 0 0.5rem 0;
+}
+
+a {
+  color: var(--color-tan);
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background: var(--color-black-soft);
+  border-bottom: 1px solid var(--color-brown-dark);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar .brand {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-tan);
+  letter-spacing: 0.5px;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navbar nav a, .navbar nav button {
+  background: none;
+  border: none;
+  color: var(--color-cream);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.navbar nav a:hover, .navbar nav button:hover {
+  color: var(--color-accent);
+}
+
+.cart-badge {
+  background: var(--color-accent);
+  color: var(--color-black);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  margin-left: 0.3rem;
+  font-weight: 700;
+}
+
+main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--color-brown-dark), var(--color-black));
+  border-radius: var(--radius);
+  padding: 3.5rem 2.5rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--color-brown);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero p {
+  color: var(--color-tan);
+  max-width: 520px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-black);
+}
+
+.btn-primary:hover {
+  background: var(--color-brown-light);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--color-brown-light);
+  color: var(--color-cream);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--color-cream);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: var(--color-black-soft);
+  border: 1px solid var(--color-brown-dark);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.product-card:hover {
+  border-color: var(--color-brown-light);
+  transform: translateY(-3px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: var(--color-brown-dark);
+}
+
+.product-card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.product-card-body h3 {
+  font-size: 1.05rem;
+}
+
+.price {
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.category-pill {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--color-brown-dark);
+  color: var(--color-tan);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filters {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filters input, .filters select {
+  background: var(--color-black-soft);
+  border: 1px solid var(--color-brown-dark);
+  color: var(--color-cream);
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius);
+}
+
+.card {
+  background: var(--color-black-soft);
+  border: 1px solid var(--color-brown-dark);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.form-page {
+  max-width: 420px;
+  margin: 2rem auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-tan);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-brown-dark);
+  background: var(--color-black);
+  color: var(--color-cream);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.error-banner {
+  background: rgba(179, 69, 44, 0.15);
+  border: 1px solid var(--color-danger);
+  color: #f2b8a8;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-brown-dark);
+  padding: 1rem 0;
+}
+
+.cart-row:last-child {
+  border-bottom: none;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qty-control button {
+  background: var(--color-brown-dark);
+  color: var(--color-cream);
+  border: none;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+}
+
+.order-card {
+  border-left: 3px solid var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.status-pill {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: var(--color-brown-dark);
+  color: var(--color-tan);
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--color-brown-light);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--color-brown-dark);
+}

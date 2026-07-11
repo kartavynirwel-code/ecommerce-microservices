@@ -1,0 +1,58 @@
+# ==== Secrets / environment ====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+secrets/
+*.secret
+
+# ==== Java / Maven / Spring Boot ====
+target/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/
+!**/src/main/**
+!**/src/test/**
+hs_err_pid*
+
+# ==== Node.js ====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.vite/
+.eslintcache
+.parcel-cache/
+
+# ==== Python ====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+*.sqlite3
+
+# ==== IDE / OS ====
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ==== Logs ====
+logs/
+*.log
+
+# ==== Misc build artifacts ====
+coverage/
+*.tsbuildinfo
