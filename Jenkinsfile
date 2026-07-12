@@ -14,6 +14,15 @@ pipeline {
             }
         }
 
+        stage('Verify Docker Compose') {
+            steps {
+                sh '''
+                    docker --version
+                    docker-compose version
+                '''
+            }
+        }
+
         stage('Prepare Environment File') {
             steps {
                 // The ENTIRE .env file is stored as a single "Secret file"
@@ -31,8 +40,8 @@ pipeline {
         stage('Build & Deploy') {
             steps {
                 sh '''
-                    docker compose down --remove-orphans || true
-                    docker compose up --build
+                    docker-compose down --remove-orphans || true
+                    docker-compose up -d --build
                     docker ps -a
                 '''
             }
@@ -42,15 +51,17 @@ pipeline {
             steps {
                 sh '''
                     sleep 15
-                    docker compose ps
+                    docker-compose ps
                 '''
             }
         }
     }
 
     post {
-        always {
-            // Never leave the generated secrets file lying around on the agent
+        cleanup {
+            // "cleanup" is guaranteed by Jenkins to run LAST, after
+            // success/failure blocks - so failure{} can still read .env
+            // (e.g. for docker-compose logs) before it gets deleted here.
             sh 'rm -f .env'
         }
         success {
@@ -58,7 +69,7 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed!'
-            sh 'docker compose logs --tail=100 || true'
+            sh 'docker-compose logs --tail=100 || true'
         }
     }
 }
