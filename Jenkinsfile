@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh '''
                     docker compose down --remove-orphans || true
-                    docker compose up -d --build
+                    docker compose up --build
                     docker ps -a
                 '''
             }
