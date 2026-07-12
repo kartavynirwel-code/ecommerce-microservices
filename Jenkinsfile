@@ -1,33 +1,64 @@
-pipeline{
+pipeline {
     agent any
 
-    stages{
-        stage('Checkout Code'){
-            steps{
+    options {
+        disableConcurrentBuilds()
+        timestamps()
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
                 checkout scm
             }
         }
-        stage('Build'){
-            steps{
-                '''
-                Docker compose up -d --build
-                docker ps -a
+
+        stage('Prepare Environment File') {
+            steps {
+                // The ENTIRE .env file is stored as a single "Secret file"
+                // credential in Jenkins (uploaded once via the UI). This
+                // avoids managing dozens of individual string credentials -
+                // one credential ID to rotate/update instead of many.
+                withCredentials([
+                    file(credentialsId: 'ecommerce-env-file', variable: 'ENV_FILE')
+                ]) {
+                    sh 'cp "$ENV_FILE" .env'
+                }
+            }
+        }
+
+        stage('Build & Deploy') {
+            steps {
+                sh '''
+                    docker compose down --remove-orphans || true
+                    docker compose up -d --build
+                    docker ps -a
                 '''
             }
         }
-        stage('Deploy'){
-            steps{
-                echo 'Deploying...'
+
+        stage('Health Check') {
+            steps {
+                sh '''
+                    sleep 15
+                    docker compose ps
+                '''
             }
         }
     }
 
-    post{
-        success{
+    post {
+        always {
+            // Never leave the generated secrets file lying around on the agent
+            sh 'rm -f .env'
+        }
+        success {
             echo 'Pipeline completed successfully!'
         }
-        failure{
+        failure {
             echo 'Pipeline failed!'
+            sh 'docker compose logs --tail=100 || true'
         }
     }
 }
