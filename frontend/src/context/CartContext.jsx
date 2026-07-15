@@ -10,14 +10,14 @@ export function CartProvider({ children }) {
 
   const refreshCart = useCallback(async () => {
     if (!user) return;
-    const { data } = await cartApi.get('/api/cart');
+    const { data } = await cartApi.get('/');
     setCart(data);
   }, [user]);
 
   const addToCart = useCallback(
     async (product) => {
       if (!user) throw new Error('Must be logged in to add to cart');
-      const { data } = await cartApi.post('/api/cart/items', {
+      const { data } = await cartApi.post('/items', {
         product_id: product.id,
         product_name: product.name,
         unit_price: product.price,
@@ -29,17 +29,17 @@ export function CartProvider({ children }) {
   );
 
   const updateQuantity = useCallback(async (itemId, quantity) => {
-    const { data } = await cartApi.put(`/api/cart/items/${itemId}`, { quantity });
+    const { data } = await cartApi.put(`/items/${itemId}`, { quantity });
     setCart(data);
   }, []);
 
   const removeItem = useCallback(async (itemId) => {
-    const { data } = await cartApi.delete(`/api/cart/items/${itemId}`);
+    const { data } = await cartApi.delete(`/items/${itemId}`);
     setCart(data);
   }, []);
 
   const clearCart = useCallback(async () => {
-    const { data } = await cartApi.delete('/api/cart');
+    const { data } = await cartApi.delete('/');
     setCart(data);
   }, []);
 

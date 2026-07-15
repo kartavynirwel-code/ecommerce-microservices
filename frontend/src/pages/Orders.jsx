@@ -9,7 +9,7 @@ export default function Orders() {
   useEffect(() => {
     async function load() {
       try {
-        const { data } = await orderApi.get('/api/orders/my');
+        const { data } = await orderApi.get('/my');
         setOrders(data);
       } catch (err) {
         setError('Could not load orders. Is order-service running?');

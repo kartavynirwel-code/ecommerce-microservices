@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ecommerce-ingress
+spec:
+  ingressClassName: nginx
+
+  rules:
+  - host: ecommerce.local
+    http:
+      paths:
+
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-mychart
+            port:
+              number: 80
+
+      - path: /api/auth
+        pathType: Prefix
+        backend:
+          service:
+            name: auth-service-mychart
+            port:
+              number: 8081
+
+      - path: /api/products
+        pathType: Prefix
+        backend:
+          service:
+            name: product-service-mychart
+            port:
+              number: 8082
+
+      - path: /api/cart
+        pathType: Prefix
+        backend:
+          service:
+            name: cart-service-mychart
+            port:
+              number: 8000
+
+      - path: /api/orders
+        pathType: Prefix
+        backend:
+          service:
+            name: order-service-mychart
+            port:
+              number: 3000

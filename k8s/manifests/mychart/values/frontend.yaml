@@ -1,0 +1,27 @@
+replicaCount: 2
+
+image:
+  repository: kartavyanirwel/ecommerce-frontend
+  pullPolicy: IfNotPresent
+  tag: v5
+
+service:
+  type: LoadBalancer
+  port: 80
+
+secretEnv: []
+
+configEnv:
+  VITE_AUTH_SERVICE_URL: "http://auth-service-mychart:8081"
+  VITE_PRODUCT_SERVICE_URL: "http://product-service-mychart:8082"
+  VITE_ORDER_SERVICE_URL: "http://order-service-mychart:3000"
+  VITE_CART_SERVICE_URL: "http://cart-service-mychart:8000"
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http

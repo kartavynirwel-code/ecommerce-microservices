@@ -1,0 +1,29 @@
+replicaCount: 2
+
+image:
+  repository: kartavyanirwel/ecommerce-order-service
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 3000
+
+secretEnv:
+  - DB_USER
+  - DB_PASSWORD
+  - JWT_SECRET
+
+configEnv:
+  DB_NAME: order_db
+  DB_HOST: mysql-service
+  DB_PORT: "3306"
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http

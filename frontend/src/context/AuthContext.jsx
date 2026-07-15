@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(decodeUserFromToken());
 
   const login = useCallback(async (username, password) => {
-    const { data } = await authApi.post('/api/auth/login', { username, password });
+    const { data } = await authApi.post('/login', { username, password });
     localStorage.setItem('token', data.token);
     localStorage.setItem('username', data.username);
     localStorage.setItem('role', data.role);
@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const register = useCallback(async (username, email, password) => {
-    const { data } = await authApi.post('/api/auth/register', { username, email, password });
+    const { data } = await authApi.post('/register', { username, email, password });
     localStorage.setItem('token', data.token);
     localStorage.setItem('username', data.username);
     localStorage.setItem('role', data.role);

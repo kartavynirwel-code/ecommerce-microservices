@@ -1,58 +1,144 @@
-# ==== Secrets / environment ====
+# ==========================================================
+# Secrets / Environment
+# ==========================================================
 .env
 .env.*
 !.env.example
+
 *.pem
 *.key
 *.crt
+*.p12
+*.jks
+*.keystore
+
 secrets/
+secret/
 *.secret
 
-# ==== Java / Maven / Spring Boot ====
+# ==========================================================
+# Java / Maven / Spring Boot
+# ==========================================================
 target/
 *.class
 *.jar
+*.war
+*.ear
+
 !.mvn/wrapper/maven-wrapper.jar
+
 .mvn/
 !**/src/main/**
 !**/src/test/**
-hs_err_pid*
 
-# ==== Node.js ====
+hs_err_pid*
+replay_pid*
+
+# ==========================================================
+# Node.js / React / Vite
+# ==========================================================
 node_modules/
+
+dist/
+build/
+
+.vite/
+.parcel-cache/
+.eslintcache
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-dist/
-build/
-.vite/
-.eslintcache
-.parcel-cache/
 
-# ==== Python ====
+# ==========================================================
+# Python
+# ==========================================================
 __pycache__/
 *.py[cod]
+
 *.egg-info/
 .eggs/
+
 .venv/
 venv/
 env/
+
 .pytest_cache/
 .mypy_cache/
+
 *.sqlite3
 
-# ==== IDE / OS ====
+# ==========================================================
+# Docker
+# ==========================================================
+docker-compose.override.yml
+
+# ==========================================================
+# Kubernetes / Helm
+# ==========================================================
+
+# Helm generated packages
+*.tgz
+
+# Helm dependency charts
+charts/
+
+# Helm lock file (ignore if dependencies can be regenerated)
+Chart.lock
+
+# Rendered manifests
+*.rendered.yaml
+rendered/
+
+# Local values
+values.local.yaml
+values.dev.yaml
+values.prod.local.yaml
+values.override.yaml
+
+# ==========================================================
+# Terraform
+# ==========================================================
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+
+# ==========================================================
+# IDE / Editors
+# ==========================================================
 .idea/
 .vscode/
+
 *.iml
+
+# Vim
+*.swp
+*.swo
+
+# ==========================================================
+# OS
+# ==========================================================
 .DS_Store
 Thumbs.db
 
-# ==== Logs ====
+# ==========================================================
+# Logs
+# ==========================================================
 logs/
 *.log
 
-# ==== Misc build artifacts ====
+# ==========================================================
+# Coverage / Reports
+# ==========================================================
 coverage/
+htmlcov/
 *.tsbuildinfo
+
+# ==========================================================
+# Temporary Files
+# ==========================================================
+tmp/
+temp/
+.cache/

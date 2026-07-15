@@ -18,7 +18,7 @@ export default function Home() {
     setLoading(true);
     setError('');
     try {
-      const { data } = await productApi.get('/api/products', { params });
+      const { data } = await productApi.get('/', { params });
       setProducts(data);
     } catch (err) {
       setError('Could not load products. Is product-service running?');
